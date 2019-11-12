@@ -1,0 +1,50 @@
+<html>
+
+<head>
+  <title>REED SWITCH</title>
+  <link rel="icon" href="https://icon-library.net/images/bumble-bee-icon/bumble-bee-icon-3.jpg" type="icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <style>
+    label{
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      #connect,#disconnect{
+        width: 100px;
+      }
+    </style>
+</head>
+
+
+<body>
+  <div class="jumbotron text-center">
+    <h1>Reed Switch Module with Raspberry Pi 3</h1>
+    <p>Reed Switch</p>
+  </div>
+
+  <!-- Accepts Inputs -->
+  <section class="features-icons bg-light ">
+    <div class="container text-center">
+
+      <center>
+        <!-- Broker -->
+        <div style="border:solid 1px black;text-align: center;width: 500px;">
+          <h1>REED SWITCH</h1>
+          <br><br>
+          Status: <input id="status" class="btn btn-default" type="button" value="_______________________" disabled><br><br>
+        </div>
+      </center>
+    </div>
+
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+  <script src="/browser-mqtt.js"></script>
+  <script src="/controller.js"></script>
+
+</body>
+
+
+</html>
