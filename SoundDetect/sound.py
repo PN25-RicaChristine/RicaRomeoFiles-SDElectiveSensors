@@ -3,7 +3,7 @@
 import RPi.GPIO as GPIO
 import time
 import datetime
-import os
+
 
 import paho.mqtt.client as mqtt
 
@@ -16,24 +16,41 @@ GPIO.setup(SOUND_PIN, GPIO.IN)
 
 count = 0
 
+passedTime = []
+
 def DETECTED(SOUND_PIN):
    global count
-   nowtime = datetime.datetime.now()
+   # nowtime = datetime.datetime.utcnow()
    count += 1
-   text = str(count) + ". Sound Detected at "+ str(nowtime)
-   print ("Sound Detected! " + str(nowtime) + " " + str(count))
-   client.publish("ricameonanitcherry",text)
-   #os.system("/home/pi/scripts/playfile.py")
+   # text = str(count) + ". Sound Detected at "+ str(nowtime)
+   # text ="Sound Detected at "+ str(nowtime)
+   # print ("Sound Detected! " + str(nowtime) + " " + str(count))
+   print("Sound Detected!")
+   client.publish("ricameonanitcherry","Reach Noisy Level!" )
 
-   return nowtime
+
+def NODETECTED(SOUND_PIN):
+	print("No Detected")
 print ("Sound Module Test (CTRL+C to exit)")
 time.sleep(1)
 print ("Ready")
 
+
+# GPIO.add_event_detect(SOUND_PIN, GPIO.RISING, callback=DETECTED)
+
+# while True:
+# 	# GPIO.add_event_detect(SOUND_PIN, GPIO.FALLING, callback=NODETECTED)
+# 	print("while True:")
+
+
 try:
-   GPIO.add_event_detect(SOUND_PIN, GPIO.RISING, callback=DETECTED)
+   GPIO.add_event_detect(SOUND_PIN, GPIO.RISING, bouncetime=1000)
+   GPIO.add_event_callback(SOUND_PIN, callback=DETECTED)
    while 1:
-      time.sleep(1)
+      time.sleep(0.5)
+      client.publish("ricameonanitcherry","Not Noisy")
+      print("None")
+      # print("SOUND_PIN: " + str(GPIO.input(SOUND_PIN)))
 except KeyboardInterrupt:
    print (" Quit")
    GPIO.cleanup()

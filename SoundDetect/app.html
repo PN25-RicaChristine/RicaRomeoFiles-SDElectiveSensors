@@ -21,11 +21,11 @@
 
       body{
         background-color: #e6fff2;
-        border-style: groove;
+        /* border-style: groove;  */
       }
 
-      #soundet{
-        border-style: outset;
+      #sounddiv{
+        border-style: groove;
         border-color: #00cc99;
         text-align: center;
         width: 1000px;
@@ -35,19 +35,60 @@
         text-align: center;
         width: 1000px;
       }
-
-      center{
-        padding-top: 200px;
-      }
-
       #header{
         background-color:#00cc99;
         height: 140px;
         width: 100%;
-        padding-top: 0px;
-        border-style: groove;
+        /* border-style: groove; */
         position: fixed;
+        overflow: visible;
       }
+
+
+      #header a {
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+      #header a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+
+      #header a.active {
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      * {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Create four equal columns that floats next to each other */
+#row2 .column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
  
     </style>
@@ -55,32 +96,119 @@
 
 
 <body>
-  <div class="jumbotron text-center" id="header">
-    <h1 style="font-size: 60px;">Sound Sensor Module with Raspberry Pi 3</h1>
-    <p style="font-size: 30px;">Sound Detector</p>
+  <div class="w3-top">
+    <div id="header">
+      <h1 style="font-size: 50px;">Sound Sensor Module with Raspberry Pi 3</h1><br>
+      <!-- <p style="font-size: 30px;">Sound Detector</p> -->
+      <a id="a" class="active" href="#header">Home</a>
+      <a id="b" href="#about">About</a>
+      <a id="c" href="#soundet">Detector</a>
+      <a id="d" href="#record">Records</a>
+    </div>
   </div>
 
 
+  <center style="padding-top:200px;">
+    <div class="row" id="home" style="display:block">
+      <div class="column">
+        <h2 style="font-family: Times New Roman, Times, serif;font-size: 70px;font-weight: bolder;font-style: italic">HubSpy</h2>
+        <img src="/pic.png" width="500px" height="400px">
+        <p style="font-family: Arial, Helvetica, sans-serif;font-size: 20px;font-weight: bolder;font-style: italic">your
+          sidekick to catch noise noisy environment...</p>
+      </div>
+      <div class="column">
+        <br><br><br><br><br>
+        <p style="font-family: Arial, Helvetica, sans-serif;font-size: 30px;text-align:center;font-style: italic">"HubSpy
+          is a sound sensor device that notifies if an environment is too noisy. It uses a Sound Sensor Module with
+          Raspberry Pi 3 to make noise detecting possible."</p>
+      </div>
+    </div>
+
+  </center>
 
   <!-- Accepts Inputs -->
-  <center >
+  <center>
     <!-- Broker -->
-    <div id="soundet">
-      <h1 style="font-size: 80px;">SOUND DETECTOR</h1>
+    <br><br>
+    <div id="soundet" style="display:none">
+      <div id="sounddiv">
+        <h1 style="font-family: Times New Roman, Times, serif;font-size: 80px;font-weight: bolder;font-style: italic">SOUND
+          DETECTOR</h1>
+        <br><br>
+        <p style="font-size: 40px;"> Status:</p> <input id="status" style="font-size: 40px;" class="btn btn-default"
+          type="button" value="_______________________" disabled><br><br>
+      </div>
       <br><br>
-      <p style="font-size: 40px;"> Status:</p> <input id="status" style="font-size: 40px;" class="btn btn-default" type="button"
-        value="_______________________" disabled><br><br>
+      <p style="font-size: 20px;font-weight: bold;font-style: italic">Click "Records" above to see noise records..</p>
     </div>
   </center>
 
-  <center style=" padding-top: 50px;">
-    <div>
-      <h1>Welcome to our App!</h1>
-      <p style="text-align:justify">This application called "SOUND DETECTOR" will help the educator of Passerelles Numeriques Philippines monitor their scholars
-        during study time, comlab hours, eating time, tasking time or even duirng sleeping time. This is created by the Group 4 Team Army as final project
-        for their SD Elective 2 course with the help of their instructor, Sir Junrey Ansing. The group members are proudly from PN.
+
+  <center>
+    <div id="record" style="display:none">
+      <h5 style="font-family: Times New Roman, Times, serif;font-size: 50px;font-weight: bolder;font-style: italic">NOISE
+        RECORDS</h5>
+      <table id="receiver" class="table  table-hover  ">
+        <thead style="background-color:#ff3333;color:white;font-size: 30px;">
+          <th>ROOM NAME</th>
+          <th>LEVEL</th>
+          <th>Time Stamp</th>
+        </thead>
+        <tbody id="msg" style="font-size:15px;">
+
+        </tbody>
+      </table>
+
+    </div>
+  </center>
+  <center>
+    <div id="about" style="display:none">
+      <h1 style="font-family: Times New Roman, Times, serif;font-size: 50px;font-weight: bolder;font-style: italic">Welcome
+        to HubSpy!</h1>
+      <p style="font-family: Arial, Helvetica, sans-serif;font-size: 20px;text-align:justify;font-style: normal">This
+        system will help Passerelles Numeriques Philippines educators
+        to monitor who are those specified rooms who are creating noise and who are very noisy.
+        The system would detect if the scholars who are staying in a certain room are very noisy.
+        If the system detects that a certain room is quite noisy,
+        the system will give an alert to the educator that the scholars who are staying in that room are creating
+        noise.
+        And by that, educators would have the chance to correct, reprimand or worse give a penalty for certain room
+        who are reported by the system to be noisy. The educators would be continually notified by the system if
+        the scholars who are staying in a specific room are really very noisy.
+        The system would just stop sending notifications to the educators if the scholars are already
+        minimizing their voice or if they are already quiet and serene and the educators have clicked "OK" to really
+        assure she/he has identified or get the noise.
+        This system is developed by the
+        Group 4 Team Army as final project
+        for their SD Elective 2 course with the help of their instructor, Sir Junrey Ansing. The group members are
+        proudly from PNP Batch 2020B.
       </p>
-      
+      <br><br>
+      <h1 style="font-family: Times New Roman, Times, serif;font-size: 50px;font-weight: bolder;font-style: italic">The
+        Developers</h1>
+      <div class="row" id="row2">
+        <div class="column">
+          <img src="/rcdebuayan.jfif" style="width:200px;border-radius:50%;border:1px solid gray">
+          <h4 style="font-family: Times New Roman, Times, serif;font-weight: bolder;font-style: italic;">Debuayan</h4>
+          <h5>Rica Christine D.</h5>
+        </div>
+        <div class="column">
+          <img src="/cheche.png" style="width:200px;border-radius:50%;border:1px solid gray">
+          <h4 style="font-family: Times New Roman, Times, serif;font-weight: bolder;font-style: italic">Herrera</h4>
+          <h5>Cherry Mae B.</h5>
+        </div>
+        <div class="column">
+          <img src="/nanit.jpg" style="width:200px;border-radius:50%;border:1px solid gray">
+          <h4 style="font-family: Times New Roman, Times, serif;font-weight: bolder;font-style: italic">Katipunan</h4>
+          <h5>Nanit F.</h5>
+        </div>
+        <div class="column">
+          <img src="/meo.png" style="width:200px;border-radius:50%;border:1px solid gray">
+          <h4 style="font-family: Times New Roman, Times, serif;font-weight: bolder;font-style: italic">Lenizo</h4>
+          <h5>Romeo G.</h5>
+        </div>
+      </div>
+
 
     </div>
   </center>
@@ -91,7 +219,38 @@
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
   <script src="/browser-mqtt.js"></script>
   <script src="/controller.js"></script>
+  <script>
+    document.getElementById("a").onclick = function () {
+      document.getElementById("home").style.display = "block";
+      document.getElementById("soundet").style.display = "none";
+      document.getElementById("record").style.display = "none";
+      document.getElementById("about").style.display = "none";
+    }
 
+    document.getElementById("b").onclick = function () {
+      document.getElementById("about").style.display = "block";
+      document.getElementById("soundet").style.display = "none";
+      document.getElementById("record").style.display = "none";
+      document.getElementById("home").style.display = "none";
+
+    }
+
+    document.getElementById("c").onclick = function () {
+      document.getElementById("about").style.display = "none";
+      document.getElementById("soundet").style.display = "block";
+      document.getElementById("record").style.display = "none";
+      document.getElementById("home").style.display = "none";
+    }
+
+    document.getElementById("d").onclick = function () {
+      document.getElementById("about").style.display = "none";
+      document.getElementById("soundet").style.display = "none";
+      document.getElementById("record").style.display = "block";
+      document.getElementById("home").style.display = "none";
+    }
+
+
+  </script>
 </body>
 
 
